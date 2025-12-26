@@ -10,7 +10,7 @@ public enum TitleTypes
     TvPilot,
     TvSeries,
     TvShort,
-    TvSpecail,
+    TvSpecial,
     Video,
     VideoGame
 }
