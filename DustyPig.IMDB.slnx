@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="APITests/APITests.csproj" />
+  <Project Path="DustyPig.IMDB/DustyPig.IMDB.csproj" />
+</Solution>
