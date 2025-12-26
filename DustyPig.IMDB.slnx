@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".github/workflows/auto_build.yml" />
+    <File Path=".github/workflows/release.yml" />
+  </Folder>
   <Project Path="APITests/APITests.csproj" />
   <Project Path="DustyPig.IMDB/DustyPig.IMDB.csproj" />
 </Solution>
