@@ -134,20 +134,28 @@ public class Client
             primaryProfessionStr = primaryProfession.ToString()!.ToLower();
         return SearchPersonAsync(query, primaryProfessionStr, cancellationToken);
     }
-    
-    
-    
-    /// <summary>
-    /// This endpoint isn't for public use
-    /// </summary>
-    public Task<Response<ExternalData>> NextExternalToFindAsync(string privilegedApiKey, CancellationToken cancellationToken = default) =>
-        _restClient.GetAsync<ExternalData>($"API/NextExternalToFind?privilegedApiKey={privilegedApiKey}", null, cancellationToken);
 
 
 
     /// <summary>
     /// This endpoint isn't for public use
     /// </summary>
-    public Task<Response> UpdateExternalDataAsync(string privilegedApiKey, ExternalData externalData, CancellationToken cancellationToken = default) =>
-        _restClient.PostAsync($"API/UpdateExternalData?privilegedApiKey={privilegedApiKey}", externalData, null, cancellationToken);
+    public Task<Response<List<ExternalData>>> NextExternalToFindAsync(string privilegedApiKey, ushort? count = null, CancellationToken cancellationToken = default)
+    {
+        Dictionary<string, string> qpd = [];
+        qpd.Add("privilegedApiKey", privilegedApiKey);
+        if (count > 0)
+            qpd.Add("count", count.Value.ToString());
+
+        var qp = string.Join('&', qpd.Select(_ => $"{_.Key}={_.Value}"));
+
+        return _restClient.GetAsync<List<ExternalData>>($"API/NextExternalToFind?{qp}", null, cancellationToken);
+    }
+
+
+    /// <summary>
+    /// This endpoint isn't for public use
+    /// </summary>
+    public Task<Response> UpdateExternalDataAsync(string privilegedApiKey, IEnumerable<ExternalData> externalDatas, CancellationToken cancellationToken = default) =>
+        _restClient.PostAsync($"API/UpdateExternalData?privilegedApiKey={privilegedApiKey}", externalDatas, null, cancellationToken);
 }
