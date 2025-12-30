@@ -140,7 +140,7 @@ public class Client
     /// <summary>
     /// This endpoint isn't for public use
     /// </summary>
-    public Task<Response<List<ExternalData>>> NextExternalToFindAsync(string privilegedApiKey, ushort? count = null, CancellationToken cancellationToken = default)
+    public Task<Response<List<UpdateExternalData>>> NextExternalToFindAsync(string privilegedApiKey, ushort? count = null, CancellationToken cancellationToken = default)
     {
         Dictionary<string, string> qpd = [];
         qpd.Add("privilegedApiKey", privilegedApiKey);
@@ -149,7 +149,7 @@ public class Client
 
         var qp = string.Join('&', qpd.Select(_ => $"{_.Key}={_.Value}"));
 
-        return _restClient.GetAsync<List<ExternalData>>($"API/NextExternalToFind?{qp}", null, cancellationToken);
+        return _restClient.GetAsync<List<UpdateExternalData>>($"API/NextExternalToFind?{qp}", null, cancellationToken);
     }
 
 
